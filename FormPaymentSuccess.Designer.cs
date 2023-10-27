@@ -60,14 +60,15 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(277, 252);
+            this.label2.Location = new System.Drawing.Point(327, 259);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(545, 29);
+            this.label2.Size = new System.Drawing.Size(457, 29);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Vui lòng kiểm tra lại tiền thừa trả lại từ máy(nếu có)";
+            this.label2.Text = "Vui lòng kiểm tra lại tiền thừa trả lại từ máy";
             this.label2.Visible = false;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // Form3
+            // FormPaymentSuccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,9 +79,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form3";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Name = "FormPaymentSuccess";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
+            this.ResumeLayout(false);
             this.PerformLayout();
 
         }

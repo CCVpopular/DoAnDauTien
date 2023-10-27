@@ -18,7 +18,14 @@ namespace QLBVMB
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            FormLogIn formLogIn = new FormLogIn();
+            formLogIn.Show();
             this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

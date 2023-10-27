@@ -81,7 +81,9 @@
             this.Controls.Add(this.buttonReturn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormFuntion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormFuntion";
             this.Load += new System.EventHandler(this.FormFuntion_Load);
             this.ResumeLayout(false);

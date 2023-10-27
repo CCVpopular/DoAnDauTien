@@ -12,19 +12,16 @@ namespace QLBVMB
 {
     public partial class FormInputCash : Form
     {
-        private FormPayment formPayment;
-        public FormInputCash(FormPayment formPayment)
+        public FormInputCash()
         {
             InitializeComponent();
-            this.formPayment = formPayment;
         }
 
-        public string DataToPass { get; set; }
         private void button1_Click(object sender, EventArgs e)
         {
             if (Application.OpenForms["FormPayment"] is FormPayment form1)
             {
-                form1.text1(50000);
+                form1.textcash(50000);
             }
         }
 
@@ -32,7 +29,7 @@ namespace QLBVMB
         {
             if (Application.OpenForms["FormPayment"] is FormPayment form1)
             {
-                form1.text1(100000);
+                form1.textcash(100000);
             }
         }
 
@@ -40,7 +37,7 @@ namespace QLBVMB
         {
             if (Application.OpenForms["FormPayment"] is FormPayment form1)
             {
-                form1.text1(200000);
+                form1.textcash(200000);
             }
         }
 
@@ -48,7 +45,7 @@ namespace QLBVMB
         {
             if (Application.OpenForms["FormPayment"] is FormPayment form1)
             {
-                form1.text1(500000);
+                form1.textcash(500000);
             }
         }
     }

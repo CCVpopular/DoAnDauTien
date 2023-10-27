@@ -17,11 +17,6 @@ namespace QLBVMB.Model
         [StringLength(10)]
         public string MaKH { get; set; }
 
-        [Column("Mã vé chuyến bay")]
-        [Required]
-        [StringLength(10)]
-        public string Mã_vé_chuyến_bay { get; set; }
-
         [Column(TypeName = "date")]
         public DateTime NgayLapHoaDon { get; set; }
 

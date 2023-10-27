@@ -24,7 +24,7 @@ namespace QLBVMB.Model
         [StringLength(10)]
         public string Mã_khách_hàng { get; set; }
 
-        [Column("Trạng Thái")]
-        public int? Trạng_Thái { get; set; }
+        [StringLength(6)]
+        public string MaHoaDon { get; set; }
     }
 }

@@ -11,7 +11,6 @@ using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace QLBVMB
@@ -186,7 +185,6 @@ namespace QLBVMB
                 danhsachve.Mã_chuyến_bay = temp;
                 danhsachve.Mã_khách_hàng = tempmakhachhang;
                 context.danhsachves.Add(danhsachve);
-                textBox2.Text = danhsachve.Mã_vé_chuyến_bay;
                 textBox1.Text = dem++.ToString();
                 cmb1.Text = "";
                 cmb2.Text = "";
@@ -198,6 +196,8 @@ namespace QLBVMB
                 label5.Visible = false;
                 dateTimePicker2.Visible = false;
                 BindGrid();
+                MessageBox.Show("Lưu vé thành công");
+                
             }
             catch (Exception ex) 
             {
@@ -234,12 +234,18 @@ namespace QLBVMB
 
         private void dgvmaybay_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvmaybay.SelectedRows.Count <= 0)
+            try
             {
-                dgvmaybay.CurrentRow.Selected = true;
-                temp = dgvmaybay.Rows[e.RowIndex].Cells[0].Value.ToString();
-                textBox2.Text = temp;
+                if (dgvmaybay.SelectedRows.Count <= 0)
+                {
+                    dgvmaybay.CurrentRow.Selected = true;
+                    temp = dgvmaybay.Rows[e.RowIndex].Cells[0].Value.ToString();
+                }
             }
+            catch (Exception ex)
+            { 
+                MessageBox.Show(ex.Message);
+            }        
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

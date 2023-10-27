@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,11 +14,12 @@ namespace QLBVMB
 {
     public partial class FormPayment : Form
     {
+        ModelQLBVMB context = new ModelQLBVMB();
         TextBox textBox1 = new TextBox();
         Label label3 = new Label();
         public TextBox textBoxnhantien = new TextBox();
         public TextBox textBoxPIN = new TextBox();
-        decimal sothe;
+        private decimal sothe = 0;
         string tempmakhachhang;
         public FormPayment(string t)
         {
@@ -102,23 +104,29 @@ namespace QLBVMB
             var listvemaybay = context.datvemaybays.ToList();
             var listve = context.danhsachves.ToList();
             decimal tongtien = 0;
-            foreach (var item in listve)
+            foreach (var item1 in listve)
             {
-            }
-            foreach (var item in listvemaybay)
-            {
-                listViewctchuyenbay.Items.Add($"                                                           ");
-                listViewctchuyenbay.Items.Add($"       {item.Nơi_khởi_hành} <-----> {item.Nơi_đến}");
-                listViewctchuyenbay.Items.Add($"                                                           ");
-                listViewctchuyenbay.Items.Add($"    Khởi hành:               {item.Thời_gian_khởi_hành} on {item.Ngày_đi.Day}/{item.Ngày_đi.Month}/{item.Ngày_đi.Year}");
-                listViewctchuyenbay.Items.Add($"    Hạng vé: {item.Hạng_vé}");
-                listViewctchuyenbay.Items.Add($"    Kiểu vé: {item.Kiểu_vé}");
-                listViewctchuyenbay.Items.Add($"    Đơn giá: {item.Giá}");
-                listViewctchuyenbay.Items.Add($"");
-                tongtien += item.Giá;
+                if(tempmakhachhang == item1.Mã_khách_hàng && item1.MaHoaDon == null)
+                {
+                    foreach (var item in listvemaybay)
+                    {
+                        if (item1.Mã_chuyến_bay == item.Mã_chuyến_bay)
+                        {
+                            listViewctchuyenbay.Items.Add($"                                                           ");
+                            listViewctchuyenbay.Items.Add($"       {item.Nơi_khởi_hành} <-----> {item.Nơi_đến}");
+                            listViewctchuyenbay.Items.Add($"                                                           ");
+                            listViewctchuyenbay.Items.Add($"    Khởi hành:               {item.Thời_gian_khởi_hành} on {item.Ngày_đi.Day}/{item.Ngày_đi.Month}/{item.Ngày_đi.Year}");
+                            listViewctchuyenbay.Items.Add($"    Hạng vé: {item.Hạng_vé}");
+                            listViewctchuyenbay.Items.Add($"    Kiểu vé: {item.Kiểu_vé}");
+                            listViewctchuyenbay.Items.Add($"    Đơn giá: {item.Giá}");
+                            listViewctchuyenbay.Items.Add($"");
+                            tongtien += item.Giá;
+                        }
+                    }
+                }
             }
             textBoxthue.Text = (tongtien * 10 / 100).ToString();
-            textBoxttongtien.Text = (tongtien * 90 / 100).ToString();
+            textBoxttongtien.Text = (tongtien + (tongtien * 10 / 100)).ToString();
             for (int i = 3; i < listViewctchuyenbay.Items.Count; i += 8)
             {
                 listViewctchuyenbay.Items[i].Font = new Font("Arial", 16);
@@ -151,16 +159,34 @@ namespace QLBVMB
                 {
                     throw new Exception("Vui lòng chọn phương thức thanh toán");
                 }
+                if(sothe == 0)
+                {
+                    throw new Exception("Quý khách vui lòng đưa thẻ vào máy");
+                }
                 if (textBoxPIN.TextLength != 6 && comboBox1.SelectedIndex == 1)
                 {
                     throw new Exception("Vui lòng nhập số PIN đủ 6 số");
                 }
-                if (decimal.Parse(textBoxnhantien.Text) < decimal.Parse(textBoxttongtien.Text) && comboBox1.SelectedIndex == 0)
+                var listcard = context.ThongTinThes.ToList();
+                bool temp = false;
+                foreach (var item in listcard)
                 {
-                    throw new Exception("Vui lòng đưa tiền mặt vào máy đủ hoặc hơn số tiền cần thanh toán");
+                    if (item.sothe == sothe && item.pin == decimal.Parse(textBoxPIN.Text))
+                    {
+                        temp = true; break;
+                    }
                 }
-
-                ModelQLBVMB context = new ModelQLBVMB();
+                if (temp == false)
+                {
+                    throw new Exception("Vui lòng nhập số số thẻ và số PIN hợp lệ");
+                }
+                if(comboBox1.SelectedIndex == 0)
+                {
+                    if (decimal.Parse(textBoxnhantien.Text) < decimal.Parse(textBoxttongtien.Text))
+                    {
+                        throw new Exception("Vui lòng đưa tiền mặt vào máy đủ hoặc hơn số tiền cần thanh toán");
+                    }
+                }
                 var listhoadon = context.HoaDons.ToList();
                 var listvemaybay = context.datvemaybays.ToList();
                 for (int i = 0; i < listvemaybay.Count; i++)
@@ -171,35 +197,62 @@ namespace QLBVMB
                 {
                     form3.label2.Visible = true;
                 }
-
-                form3.ShowDialog();
-            }
+                savesql();
+                form3.Show();
+                this.Close();
+        }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+}
 
         public void savesql()
         {
-            try
+            using (var transaction = context.Database.BeginTransaction())
             {
-
-            }
-            catch
-            {
+                try
+                {
+                    var listve = context.danhsachves.ToList();
+                    var listhoadon = context.HoaDons.ToList();
+                    for (int i = 0; i < listve.Count; i++)
+                    {
+                        if (tempmakhachhang == listve[i].Mã_khách_hàng && listve[i].MaHoaDon == null)
+                        {
+                            listve[i].MaHoaDon = "HD" + (listhoadon.Count + 1).ToString("D4"); ;
+                        }
+                    }
+                    HoaDon hoaDon = new HoaDon();
+                    hoaDon.MaHoaDon = "HD" + (listhoadon.Count + 1).ToString("D4");
+                    hoaDon.MaKH = tempmakhachhang;
+                    hoaDon.NgayLapHoaDon = DateTime.Now;
+                    hoaDon.Thue = double.Parse(textBoxthue.Text);
+                    hoaDon.TongTien = double.Parse(textBoxttongtien.Text);
+                    context.HoaDons.Add(hoaDon);
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    transaction.Rollback();
+                }
             }
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            FormInputCash form2 = new FormInputCash(this);
+            FormInputCash form2 = new FormInputCash();
             form2.ShowDialog();
         }
-        public void text1(double v)
+        public void textcash(double v)
         {
             double temp = double.Parse(textBoxnhantien.Text.ToString());
             temp += v;
             textBoxnhantien.Text = temp.ToString();
+        }
+        public void textcard(decimal v)
+        {
+            sothe = v;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,6 +268,11 @@ namespace QLBVMB
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxthue_TextChanged(object sender, EventArgs e)
         {
 
         }

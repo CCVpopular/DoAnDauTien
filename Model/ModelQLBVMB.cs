@@ -8,7 +8,7 @@ namespace QLBVMB.Model
     public partial class ModelQLBVMB : DbContext
     {
         public ModelQLBVMB()
-            : base("name=ModelQLBVMB2")
+            : base("name=ModelQLBVMB5")
         {
         }
 
@@ -25,12 +25,13 @@ namespace QLBVMB.Model
                 .IsFixedLength();
 
             modelBuilder.Entity<danhsachve>()
-                .Property(e => e.Mã_chuyến_bay)
+                .Property(e => e.Mã_khách_hàng)
                 .IsFixedLength();
 
             modelBuilder.Entity<danhsachve>()
-                .Property(e => e.Mã_khách_hàng)
-                .IsFixedLength();
+                .Property(e => e.MaHoaDon)
+                .IsFixedLength()
+                .IsUnicode(false);
 
             modelBuilder.Entity<datvemaybay>()
                 .Property(e => e.Giá)
@@ -43,10 +44,6 @@ namespace QLBVMB.Model
 
             modelBuilder.Entity<HoaDon>()
                 .Property(e => e.MaKH)
-                .IsFixedLength();
-
-            modelBuilder.Entity<HoaDon>()
-                .Property(e => e.Mã_vé_chuyến_bay)
                 .IsFixedLength();
 
             modelBuilder.Entity<KhachHang>()

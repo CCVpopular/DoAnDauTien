@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "  Chi Tiết Chuyến Bay"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.White, new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             " "}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Transparent, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -222,7 +222,7 @@
             this.textBoxphibodung.ReadOnly = true;
             this.textBoxphibodung.Size = new System.Drawing.Size(95, 22);
             this.textBoxphibodung.TabIndex = 22;
-            this.textBoxphibodung.Text = "30000";
+            this.textBoxphibodung.Text = "0";
             this.textBoxphibodung.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
@@ -247,6 +247,7 @@
             this.textBoxthue.TabIndex = 1;
             this.textBoxthue.Text = "0";
             this.textBoxthue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxthue.TextChanged += new System.EventHandler(this.textBoxthue_TextChanged);
             // 
             // label31
             // 
@@ -329,13 +330,13 @@
             this.columnHeader1});
             this.listViewctchuyenbay.HideSelection = false;
             this.listViewctchuyenbay.ImeMode = System.Windows.Forms.ImeMode.On;
-            listViewItem1.IndentCount = 1;
-            listViewItem1.UseItemStyleForSubItems = false;
-            listViewItem2.IndentCount = 5;
-            listViewItem2.UseItemStyleForSubItems = false;
+            listViewItem5.IndentCount = 1;
+            listViewItem5.UseItemStyleForSubItems = false;
+            listViewItem6.IndentCount = 5;
+            listViewItem6.UseItemStyleForSubItems = false;
             this.listViewctchuyenbay.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.listViewctchuyenbay.Location = new System.Drawing.Point(657, 20);
             this.listViewctchuyenbay.Name = "listViewctchuyenbay";
             this.listViewctchuyenbay.Size = new System.Drawing.Size(270, 452);
