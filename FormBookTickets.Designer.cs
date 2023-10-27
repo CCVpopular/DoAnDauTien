@@ -115,6 +115,8 @@
             // 
             // dgvmaybay
             // 
+            this.dgvmaybay.AllowUserToAddRows = false;
+            this.dgvmaybay.AllowUserToDeleteRows = false;
             this.dgvmaybay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvmaybay.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column10,
@@ -130,6 +132,7 @@
             this.Column6});
             this.dgvmaybay.Location = new System.Drawing.Point(437, 135);
             this.dgvmaybay.Name = "dgvmaybay";
+            this.dgvmaybay.ReadOnly = true;
             this.dgvmaybay.RowHeadersWidth = 62;
             this.dgvmaybay.RowTemplate.Height = 28;
             this.dgvmaybay.Size = new System.Drawing.Size(1017, 463);
@@ -141,6 +144,7 @@
             this.Column10.HeaderText = "Mã vé";
             this.Column10.MinimumWidth = 8;
             this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
             this.Column10.Visible = false;
             this.Column10.Width = 150;
             // 
@@ -149,6 +153,7 @@
             this.Column2.HeaderText = "Nơi khởi hành";
             this.Column2.MinimumWidth = 8;
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Width = 150;
             // 
             // Column3
@@ -156,6 +161,7 @@
             this.Column3.HeaderText = "Nơi đến";
             this.Column3.MinimumWidth = 8;
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             this.Column3.Width = 150;
             // 
             // Column7
@@ -163,6 +169,7 @@
             this.Column7.HeaderText = "Thời gian khởi hành";
             this.Column7.MinimumWidth = 8;
             this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             this.Column7.Width = 150;
             // 
             // Column8
@@ -170,6 +177,7 @@
             this.Column8.HeaderText = "Thời gian đến";
             this.Column8.MinimumWidth = 8;
             this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             this.Column8.Width = 150;
             // 
             // Column1
@@ -177,6 +185,7 @@
             this.Column1.HeaderText = "Ngày đi";
             this.Column1.MinimumWidth = 8;
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Width = 150;
             // 
             // Column11
@@ -184,6 +193,7 @@
             this.Column11.HeaderText = "Ngày về";
             this.Column11.MinimumWidth = 8;
             this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
             this.Column11.Width = 150;
             // 
             // Column5
@@ -191,6 +201,7 @@
             this.Column5.HeaderText = "Hạng vé";
             this.Column5.MinimumWidth = 8;
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             this.Column5.Width = 150;
             // 
             // Column9
@@ -198,6 +209,7 @@
             this.Column9.HeaderText = "Kiểu vé";
             this.Column9.MinimumWidth = 8;
             this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
             this.Column9.Width = 150;
             // 
             // Column4
@@ -205,6 +217,7 @@
             this.Column4.HeaderText = "Máy bay";
             this.Column4.MinimumWidth = 8;
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             this.Column4.Width = 150;
             // 
             // Column6
@@ -212,6 +225,7 @@
             this.Column6.HeaderText = "Giá";
             this.Column6.MinimumWidth = 8;
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             this.Column6.Width = 150;
             // 
             // radioButton1
@@ -383,7 +397,7 @@
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 28;
             // 
-            // Datvemaybay
+            // FormBookTickets
             // 
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1658, 717);
@@ -408,7 +422,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Datvemaybay";
+            this.Name = "FormBookTickets";
             this.Text = "datvemaybay";
             this.Load += new System.EventHandler(this.Datvemaybay_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvmaybay)).EndInit();

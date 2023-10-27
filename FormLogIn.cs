@@ -41,7 +41,7 @@ namespace QLBVMB
                             {
                                 //Chuyển hướng tới form tiếp theo, do chưa có nên đóng form luôn
                                 temp = true;
-                                FormFuntion formFuntion = new FormFuntion();
+                                FormFuntion formFuntion = new FormFuntion(k.MaKH);
                                 formFuntion.Show();
                                 this.Hide();
                                 break;

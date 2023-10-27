@@ -23,5 +23,8 @@ namespace QLBVMB.Model
         [Required]
         [StringLength(10)]
         public string Mã_khách_hàng { get; set; }
+
+        [Column("Trạng Thái")]
+        public int? Trạng_Thái { get; set; }
     }
 }

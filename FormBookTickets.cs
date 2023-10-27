@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -19,13 +20,15 @@ namespace QLBVMB
     {
         ModelQLBVMB context;
         List<danhsachve> listdanhsachve;
-        danhsachve danhsachve = new danhsachve();
+        danhsachve danhsachve;
         string temp;
+        string tempmakhachhang;
         int dem = 1;
-        public FormBookTickets()
+        public FormBookTickets(string t)
         {
             InitializeComponent();
             context = new ModelQLBVMB();
+            tempmakhachhang = t;
         }
         private void FillDepaturePlaceCombobox()
         {
@@ -144,10 +147,12 @@ namespace QLBVMB
                         }
                     }
                 }
+
                 temp = null;
             }
             catch (Exception ex)
             {
+                BindGrid();
                 MessageBox.Show(ex.Message);
             }
 
@@ -175,10 +180,11 @@ namespace QLBVMB
                 {
                     throw new Exception("Vui lòng chọn vé trong danh sách");
                 }
+                danhsachve = new danhsachve();
                 listdanhsachve = context.danhsachves.ToList();
                 danhsachve.Mã_vé_chuyến_bay = "VMB" + (listdanhsachve.Count + dem).ToString("D4");
                 danhsachve.Mã_chuyến_bay = temp;
-                danhsachve.Mã_khách_hàng = "1";
+                danhsachve.Mã_khách_hàng = tempmakhachhang;
                 context.danhsachves.Add(danhsachve);
                 textBox2.Text = danhsachve.Mã_vé_chuyến_bay;
                 textBox1.Text = dem++.ToString();
@@ -191,6 +197,7 @@ namespace QLBVMB
                 radioButton2.Checked = false;
                 label5.Visible = false;
                 dateTimePicker2.Visible = false;
+                BindGrid();
             }
             catch (Exception ex) 
             {
@@ -200,7 +207,29 @@ namespace QLBVMB
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            using ( var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    if(danhsachve == null)
+                    {
+                        throw new Exception("Vui lòng lưu vé trước khi thanh toán");
+                    }
+                    context.SaveChanges();
+                    transaction.Commit();
+                    danhsachve = null;
+                    dem = 1;
+                    textBox1.Text = "";
+                    FormPayment formPayment = new FormPayment(tempmakhachhang);
+                    formPayment.Show();
+                    this.Close();
+                }
+                catch (Exception ex)
+                { 
+                    MessageBox.Show(ex.Message);
+                    transaction.Rollback();
+                }
+            }
         }
 
         private void dgvmaybay_CellClick(object sender, DataGridViewCellEventArgs e)

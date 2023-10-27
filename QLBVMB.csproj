@@ -73,6 +73,18 @@
     <Compile Include="FormFuntion.Designer.cs">
       <DependentUpon>FormFuntion.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormInputCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputCard.Designer.cs">
+      <DependentUpon>FormInputCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInputCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputCash.Designer.cs">
+      <DependentUpon>FormInputCash.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +97,12 @@
     <Compile Include="FormPayment.Designer.cs">
       <DependentUpon>FormPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPaymentSuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPaymentSuccess.Designer.cs">
+      <DependentUpon>FormPaymentSuccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSignUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,15 +111,23 @@
     </Compile>
     <Compile Include="Model\danhsachve.cs" />
     <Compile Include="Model\datvemaybay.cs" />
+    <Compile Include="Model\HoaDon.cs" />
     <Compile Include="Model\KhachHang.cs" />
     <Compile Include="Model\ModelQLBVMB.cs" />
+    <Compile Include="Model\ThongTinThe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormBookTickets.resx">
+      <DependentUpon>FormBookTickets.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFuntion.resx">
       <DependentUpon>FormFuntion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogIn.resx">
       <DependentUpon>FormLogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayment.resx">
+      <DependentUpon>FormPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -111,6 +137,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -125,6 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cash-icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\payment_vtcpayonlinebanking1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
