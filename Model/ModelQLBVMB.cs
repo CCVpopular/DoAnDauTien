@@ -8,7 +8,7 @@ namespace QLBVMB.Model
     public partial class ModelQLBVMB : DbContext
     {
         public ModelQLBVMB()
-            : base("name=ModelQLBVMB5")
+            : base("name=ModelQLBVMB")
         {
         }
 
@@ -32,6 +32,10 @@ namespace QLBVMB.Model
                 .Property(e => e.MaHoaDon)
                 .IsFixedLength()
                 .IsUnicode(false);
+
+            modelBuilder.Entity<danhsachve>()
+                .Property(e => e.TinhTrang)
+                .IsFixedLength();
 
             modelBuilder.Entity<datvemaybay>()
                 .Property(e => e.Giá)

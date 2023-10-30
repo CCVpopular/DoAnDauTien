@@ -16,6 +16,7 @@ namespace QLBVMB
     public partial class FormLogIn : Form
     {
         ModelQLBVMB context = new ModelQLBVMB();
+        string tempmakhachhang;
         public FormLogIn()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace QLBVMB
                 else
                 {
                     //Kiểm tra thông tin trong SQL, nếu khớp xuất ra thông báo đăng nhập thành công => Sang Form tiếp theo
-                    List<KhachHang> listTK = context.KhachHangs.ToList();
+                    var listTK = context.KhachHangs.ToList();
                     foreach (KhachHang k in listTK)
                     {
                         if (txtUserName.Text == k.MaKH || txtUserName.Text == k.Email || txtUserName.Text == k.SDT)
@@ -41,9 +42,7 @@ namespace QLBVMB
                             {
                                 //Chuyển hướng tới form tiếp theo, do chưa có nên đóng form luôn
                                 temp = true;
-                                FormFuntion formFuntion = new FormFuntion(k.MaKH);
-                                formFuntion.Show();
-                                this.Hide();
+                                tempmakhachhang = k.MaKH;
                                 break;
                             }
                         }
@@ -51,6 +50,12 @@ namespace QLBVMB
                     if(temp == false)
                     {
                         MessageBox.Show("Sai thông tin đăng nhập, mời kiểm tra và nhập lại!");
+                    }
+                    else
+                    {
+                        FormFuntion formFuntion = new FormFuntion(tempmakhachhang);
+                        formFuntion.Show();
+                        this.Hide();
                     }
 
                 }

@@ -42,5 +42,19 @@ namespace QLBVMB
         {
             
         }
+
+        private void buttonhuyve_Click(object sender, EventArgs e)
+        {
+            FormTicketCancellation formTicketCancellation = new FormTicketCancellation(tempmakhachhang);
+            formTicketCancellation.Show();
+            this.Close();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormChangeTicket changeTicket = new FormChangeTicket(tempmakhachhang, false);
+            changeTicket.Show();
+            this.Close();
+        }
     }
 }

@@ -220,7 +220,7 @@ namespace QLBVMB
                     danhsachve = null;
                     dem = 1;
                     textBox1.Text = "";
-                    FormPayment formPayment = new FormPayment(tempmakhachhang);
+                    FormPayment formPayment = new FormPayment(tempmakhachhang, false);
                     formPayment.Show();
                     this.Close();
                 }

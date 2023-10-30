@@ -21,10 +21,12 @@ namespace QLBVMB
         public TextBox textBoxPIN = new TextBox();
         private decimal sothe = 0;
         string tempmakhachhang;
-        public FormPayment(string t)
+        bool x2 = false;
+        public FormPayment(string t,bool x)
         {
             InitializeComponent();
             tempmakhachhang = t;
+            x2 = x;
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -104,9 +106,10 @@ namespace QLBVMB
             var listvemaybay = context.datvemaybays.ToList();
             var listve = context.danhsachves.ToList();
             decimal tongtien = 0;
+            decimal phibosung = 0;
             foreach (var item1 in listve)
             {
-                if(tempmakhachhang == item1.Mã_khách_hàng && item1.MaHoaDon == null)
+                if(tempmakhachhang == item1.Mã_khách_hàng && item1.TinhTrang == null)
                 {
                     foreach (var item in listvemaybay)
                     {
@@ -125,8 +128,13 @@ namespace QLBVMB
                     }
                 }
             }
+            if (x2)
+            {
+                phibosung = 50000;
+            }
+            textBoxphibodung.Text = phibosung.ToString();
             textBoxthue.Text = (tongtien * 10 / 100).ToString();
-            textBoxttongtien.Text = (tongtien + (tongtien * 10 / 100)).ToString();
+            textBoxttongtien.Text = (tongtien + phibosung + (tongtien * 10 / 100)).ToString();
             for (int i = 3; i < listViewctchuyenbay.Items.Count; i += 8)
             {
                 listViewctchuyenbay.Items[i].Font = new Font("Arial", 16);
@@ -159,7 +167,7 @@ namespace QLBVMB
                 {
                     throw new Exception("Vui lòng chọn phương thức thanh toán");
                 }
-                if(sothe == 0)
+                if(sothe == 0 && comboBox1.SelectedIndex == 1)
                 {
                     throw new Exception("Quý khách vui lòng đưa thẻ vào máy");
                 }
@@ -176,7 +184,7 @@ namespace QLBVMB
                         temp = true; break;
                     }
                 }
-                if (temp == false)
+                if (temp == false && comboBox1.SelectedIndex == 1)
                 {
                     throw new Exception("Vui lòng nhập số số thẻ và số PIN hợp lệ");
                 }
@@ -200,7 +208,7 @@ namespace QLBVMB
                 savesql();
                 form3.Show();
                 this.Close();
-        }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -219,7 +227,8 @@ namespace QLBVMB
                     {
                         if (tempmakhachhang == listve[i].Mã_khách_hàng && listve[i].MaHoaDon == null)
                         {
-                            listve[i].MaHoaDon = "HD" + (listhoadon.Count + 1).ToString("D4"); ;
+                            listve[i].MaHoaDon = "HD" + (listhoadon.Count + 1).ToString("D4");
+                            listve[i].TinhTrang = "S";
                         }
                     }
                     HoaDon hoaDon = new HoaDon();
@@ -237,7 +246,7 @@ namespace QLBVMB
                     MessageBox.Show(ex.Message);
                     transaction.Rollback();
                 }
-            }
+}
         }
         private void button2_Click(object sender, EventArgs e)
         {

@@ -26,5 +26,8 @@ namespace QLBVMB.Model
 
         [StringLength(6)]
         public string MaHoaDon { get; set; }
+
+        [StringLength(10)]
+        public string TinhTrang { get; set; }
     }
 }
